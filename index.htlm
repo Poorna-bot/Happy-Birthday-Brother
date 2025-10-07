@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎂 Happy Birthday My Brother 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --neon-blue: #00ffff;
+    --neon-pink: #ff00ff;
+    --text-color: #ffffff;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    background: radial-gradient(circle at top left, rgba(0,255,255,0.1), transparent 50%), 
+                radial-gradient(circle at bottom right, rgba(255,0,255,0.1), transparent 50%), 
+                var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 25px rgba(0,255,255,0.2);
+    border-radius: 20px;
+    padding: 35px;
+    width: 90%;
+    max-width: 640px;
+    text-align: center;
+    animation: fadeIn 3s ease;
+  }
+
+  @keyframes fadeIn {
+    0% {opacity: 0; transform: scale(0.9);}
+    100% {opacity: 1; transform: scale(1);}
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.4rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
+    margin-bottom: 10px;
+  }
+
+  p { opacity: 0.9; }
+
+  input[type="password"] {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+  }
+
+  button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 8px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px var(--neon-blue);
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--neon-pink);
+  }
+
+  .feelings {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.07);
+    box-shadow: 0 0 25px rgba(255,0,255,0.2);
+    animation: fadeIn 1.5s ease;
+  }
+
+  .feelings h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-pink);
+    text-shadow: 0 0 15px var(--neon-pink), 0 0 30px var(--neon-blue);
+  }
+
+  .hint {
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 8px;
+  }
+
+  /* Confetti scatter animation */
+  .particle {
+    position: absolute;
+    animation: scatter 6s linear infinite;
+    opacity: 0.8;
+    z-index: 1;
+    text-shadow: 0 0 10px var(--neon-blue);
+  }
+
+  @keyframes scatter {
+    0% { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1;}
+    100% { transform: translate(var(--tx), var(--ty)) scale(0.4) rotate(720deg); opacity: 0;}
+  }
+
+  @media(max-width:520px){
+    h1 {font-size: 1.8rem;}
+    .card {padding: 25px;}
+  }
+</style>
+</head>
+<body>
+  <audio id="bgMusic" src="https://www.fesliyanstudios.com/play-mp3/387" loop></audio>
+
+  <div class="card">
+    <h1>🎉 Happy Birthday Bro 🎂</h1>
+    <p>Wishing you a day full of joy, laughter, and endless neon lights! 💙💜</p>
+
+    <div id="pwArea">
+      <input id="pwInput" type="password" placeholder="Enter password (e.g. 10/11)">
+      <button id="unlockBtn">🔓 Unlock Surprise</button>
+      <p class="hint">Hint: use his special date 🎈</p>
+    </div>
+
+    <div class="feelings" id="wishBox">
+      <h2>💌 My Birthday Message 💌</h2>
+      <p>Dear Brother,</p>
+      <p>You’re the best! On your birthday, I just want to remind you how awesome you are. 💪</p>
+      <p>Keep chasing your dreams, shining bright, and living life to the fullest. 🌟</p>
+      <p>May your path glow with success and your heart stay full of happiness. 💖</p>
+      <p>— With love from your sibling 💫</p>
+      <button id="closeBtn">❌ Close</button>
+    </div>
+  </div>
+
+  <script>
+    const password = "10/11";
+    const unlockBtn = document.getElementById("unlockBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const pwInput = document.getElementById("pwInput");
+    const wishBox = document.getElementById("wishBox");
+    const pwArea = document.getElementById("pwArea");
+    const bgMusic = document.getElementById("bgMusic");
+
+    unlockBtn.onclick = () => {
+      if(pwInput.value.trim() === password){
+        wishBox.style.display = "block";
+        pwArea.style.display = "none";
+        bgMusic.play().catch(()=>{});
+      } else {
+        unlockBtn.textContent = "❌ Wrong! Try Again";
+        setTimeout(()=>unlockBtn.textContent="🔓 Unlock Surprise",1500);
+      }
+    };
+
+    closeBtn.onclick = () => {
+      wishBox.style.display = "none";
+      pwArea.style.display = "block";
+      pwInput.value = "";
+    };
+
+    // Neon confetti particles
+    const emojis = ["🎂","🎈","⭐","🎁","🎊","🪩","💫"];
+    function createParticle(){
+      const el = document.createElement("div");
+      el.classList.add("particle");
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = Math.random()*100+"vw";
+      el.style.top = Math.random()*100+"vh";
+      const tx = (Math.random()-0.5)*500+"px";
+      const ty = (Math.random()-0.5)*500+"px";
+      el.style.setProperty("--tx",tx);
+      el.style.setProperty("--ty",ty);
+      el.style.color = Math.random()>0.5 ? "var(--neon-blue)" : "var(--neon-pink)";
+      el.style.fontSize = (20 + Math.random()*25)+"px";
+      el.style.animationDuration = (4+Math.random()*6)+"s";
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),9000);
+    }
+
+    setInterval(createParticle,350);
+  </script>
+</body>
+</html>
